@@ -1,57 +1,27 @@
 package tv.on.models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
+@Entity
+@Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Channel {
+    @Id
+    @SequenceGenerator(
+            name = "channel_sequence",
+            sequenceName = "channel_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "channel_sequence"
+    )
+    public Long id;
     public String name;
     public String url;
-
-    public  Channel() {
-
-    }
-
-    public  Channel(String name, String url) {
-        this.name  = name;
-        this.url = url;
-    }
-
-    public void setName(String value) {
-        this.name = value;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    private Channel(ChannelBuilder builder) {
-        this.name = builder.name;
-        this.url = builder.url;
-    }
-
-    public class ChannelBuilder {
-
-        public String name;
-        public String url;
-
-        public ChannelBuilder(String name, String url) {
-            this.name = name;
-            this.url = url;
-        }
-
-        public ChannelBuilder setName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Channel build() {
-            return new Channel(this);
-        }
-    }
-
-
 }

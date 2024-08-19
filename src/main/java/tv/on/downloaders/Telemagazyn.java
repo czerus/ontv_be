@@ -45,12 +45,16 @@ public class Telemagazyn extends ScrapperBase implements Scrapper {
         return elements.stream()
                         .map(html -> {
                             TVShow tvShow = new TVShow();
-                            tvShow.channel = channel.name;
+                            tvShow.channel = channel;
                             tvShow.lead = html.getElementsByClass("atomsTvChannelEmissionTile__lead").text();
                             tvShow.title = html.getElementsByClass("atomsTvChannelEmissionTile__title").text();
-                            tvShow.startTime = LocalDateTime.parse(html.getElementsByTag("time").getFirst().attributes().get("data-time"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
-                            tvShow.endDateTime = LocalDateTime.parse(html.getElementsByTag("time").getFirst().attributes().get("data-endtime"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                            tvShow.episode = html.getElementsByClass("atomsTvChannelEmissionTile__episode-value").text();
+                            tvShow.startTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-time"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                            tvShow.endDateTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-endtime"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
                             logger.info("Found TV Show: {}", tvShow);
+                            if (tvShow.lead.length() > 255) {
+                                System.out.println(":::::DUPA:::::");
+                            }
                             return tvShow;
                         })
                 .toList();

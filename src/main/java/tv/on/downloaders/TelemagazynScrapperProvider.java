@@ -13,11 +13,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
-public class Telemagazyn extends ScrapperBase implements Scrapper {
+public class TelemagazynScrapperProvider extends ScrapperBase implements Scrapper {
 
-    private static final Logger logger = LoggerFactory.getLogger(Telemagazyn.class);
+    private static final Logger logger = LoggerFactory.getLogger(TelemagazynScrapperProvider.class);
 
     public static final String URL = "https://telemagazyn.pl";
     public static final String CHANNELS_URL = URL + "/stacje";
@@ -26,6 +25,7 @@ public class Telemagazyn extends ScrapperBase implements Scrapper {
 
     @Override
     public List<Channel> getAllChannels() {
+        logger.info("Retrieving all channels for provider TELEMAGAZYN");
         Document doc = downloadHtml(CHANNELS_URL);
         Elements elements = doc.selectXpath("//a[@class='atomsTvChannelList__link']");
         return elements.stream()
@@ -44,6 +44,7 @@ public class Telemagazyn extends ScrapperBase implements Scrapper {
 
     @Override
     public List<TVShow> getChannelScheduleForDate(LocalDate date, Channel channel) {
+        logger.info("Getting schedule for channel {} for date {}", channel.name, date);
         Document doc = downloadHtml(channel.url + "?dzien=" + date.toString());
         Elements elements = doc.selectXpath("//li[contains(@class, 'componentsTvChannelTvGuide__item')]");
         return elements.stream()
@@ -56,12 +57,8 @@ public class Telemagazyn extends ScrapperBase implements Scrapper {
                             tvShow.startTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-time"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
                             tvShow.endDateTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-endtime"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
                             logger.info("Found TV Show: {}", tvShow);
-                            if (tvShow.lead.length() > 255) {
-                                System.out.println(":::::DUPA:::::");
-                            }
                             return tvShow;
                         })
                 .toList();
     }
-
 }

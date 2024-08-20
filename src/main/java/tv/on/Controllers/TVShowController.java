@@ -30,6 +30,8 @@ public class TVShowController {
         return  tvShowService.getTVShowsWithTitleFromTime(title, fromDate);
     }
 
-
-
+    @GetMapping("tvshowfromforcountry")
+    public List<TVShow> getTVSowsWithTitleFromDateForCountry(String title, String fromDate, String country) {
+        return  tvShowService.getTVSowsWithTitleFromDateForCountry(title, fromDate, country);
+    }
 }

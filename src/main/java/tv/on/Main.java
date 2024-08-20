@@ -2,18 +2,15 @@ package tv.on;
 
 
 import tv.on.downloaders.Scrapper;
-import tv.on.downloaders.Telemagazyn;
+import tv.on.downloaders.TelemagazynScrapperProvider;
 import tv.on.models.Channel;
-import tv.on.models.TVShow;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        Scrapper scapperProvider = new Telemagazyn();
+        Scrapper scapperProvider = new TelemagazynScrapperProvider();
         List<Channel> channels = scapperProvider.getAllChannels();
 
 //        HashMap<Channel, HashMap<LocalDate, List<TVShow>>> schedule = new HashMap<>();

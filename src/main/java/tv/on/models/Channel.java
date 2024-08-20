@@ -1,9 +1,12 @@
 package tv.on.models;
 
+import com.neovisionaries.i18n.CountryCode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Locale;
 
 @Entity
 @Table
@@ -24,4 +27,5 @@ public class Channel {
     public Long id;
     public String name;
     public String url;
+    public CountryCode countryCode;
 }

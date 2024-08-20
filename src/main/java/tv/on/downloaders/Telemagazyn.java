@@ -1,6 +1,7 @@
 package tv.on.downloaders;
 
 
+import com.neovisionaries.i18n.CountryCode;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class Telemagazyn extends ScrapperBase implements Scrapper {
 
@@ -20,6 +22,7 @@ public class Telemagazyn extends ScrapperBase implements Scrapper {
     public static final String URL = "https://telemagazyn.pl";
     public static final String CHANNELS_URL = URL + "/stacje";
     public static final Integer NO_DAYS_IN_FUTURE = 6;
+    public static final CountryCode COUNTRY_CODE = CountryCode.getByCode("PL");
 
     @Override
     public List<Channel> getAllChannels() {
@@ -33,6 +36,7 @@ public class Telemagazyn extends ScrapperBase implements Scrapper {
                             .toString()
                             .replace("href=\"", "")
                             .replace("\"", "");
+                    channel.countryCode = COUNTRY_CODE;
                     return channel;
                 })
                 .toList();

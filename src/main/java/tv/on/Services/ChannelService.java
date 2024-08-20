@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tv.on.Repositories.ChannelRepository;
 import tv.on.models.Channel;
+import tv.on.models.TVShow;
 
 import java.util.List;
 

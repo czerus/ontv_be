@@ -45,7 +45,9 @@ public class OnTvApplication implements CommandLineRunner {
 				List<TVShow> tvShowsForDate = scrapperProvider.getChannelScheduleForDate(today, channel);
 				schedule.addAll(tvShowsForDate);
 				today = today.plusDays(1);
+				break;
 			}
+			break;
 		}
 		tvShowRepository.saveAll(schedule);
 	}

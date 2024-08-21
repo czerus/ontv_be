@@ -2,23 +2,20 @@ package tv.on;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import tv.on.Repositories.ChannelRepository;
-import tv.on.Repositories.TVShowRepository;
 
 @SpringBootApplication
 @EnableEncryptableProperties
 @EnableScheduling
 public class OnTvApplication implements CommandLineRunner {
 
-//	@Autowired
-//	ChannelRepository channelRepository;
-//	@Autowired
-//	TVShowRepository tvShowRepository;
+	private static final Logger logger = LoggerFactory.getLogger(OnTvApplication.class);
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnTvApplication.class, args);
@@ -27,7 +24,7 @@ public class OnTvApplication implements CommandLineRunner {
 	@Override
 	@SneakyThrows
 	public void run(String... args) {
-		System.out.println("Starting app");
+		logger.info("Starting the onTV app");
 	}
 
 }

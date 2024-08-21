@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 public class TVShow {
     @Id
     @SequenceGenerator(
-            name = "channel_sequence",
-            sequenceName = "channel_sequence",
+            name = "tvshow_sequence",
+            sequenceName = "tvshow_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "channel_sequence"
+            generator = "tvshow_sequence"
     )
     public Long id;
     public String title;

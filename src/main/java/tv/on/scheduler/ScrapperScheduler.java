@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import tv.on.downloaders.ScrapperRunner;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Set;
 

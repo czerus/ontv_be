@@ -20,7 +20,7 @@ public class TelemagazynScrapperProvider extends ScrapperBase implements Scrappe
 
     public static final String URL = "https://telemagazyn.pl";
     public static final String CHANNELS_URL = URL + "/stacje";
-    public static final Integer NO_DAYS_IN_FUTURE = 6;
+    public static final Integer c = 6;
     public static final CountryCode COUNTRY_CODE = CountryCode.getByCode("PL");
 
     @Override

@@ -27,11 +27,11 @@ public class TVShowController {
 
     @GetMapping("tvshowfrom")
     public List<TVShow> getTVShowsWithTitleFromDate(String title, String fromDate) {
-        return  tvShowService.getTVShowsWithTitleFromTime(title, fromDate);
+        return  tvShowService.getTVShowsWithTitleFromDate(title, fromDate);
     }
 
     @GetMapping("tvshowfromforcountry")
     public List<TVShow> getTVSowsWithTitleFromDateForCountry(String title, String fromDate, String country) {
-        return  tvShowService.getTVSowsWithTitleFromDateForCountry(title, fromDate, country);
+        return  tvShowService.getTVShowsWithTitleFromDateForCountry(title, fromDate, country);
     }
 }

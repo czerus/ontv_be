@@ -12,11 +12,8 @@ import tv.on.models.Channel;
 import tv.on.models.History;
 import tv.on.models.TVShow;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.List;
 

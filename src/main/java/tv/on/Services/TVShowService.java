@@ -24,12 +24,12 @@ public class TVShowService {
         return tvShowRepository.findByTitle(title);
     }
 
-    public List<TVShow> getTVShowsWithTitleFromTime(String title, String date) {;
-        return tvShowRepository.findByTitleAndStartTimeAfter(title, stringToDateTime(date));
+    public List<TVShow> getTVShowsWithTitleFromDate(String title, String date) {
+        return tvShowRepository.findByTitleAndStartDateTimeAfter(title, stringToDateTime(date));
     }
 
-    public List<TVShow> getTVSowsWithTitleFromDateForCountry(String title, String date, String country) {
-        return tvShowRepository.findByTitleAndStartTimeAfterAndChannelCountryCode(
+    public List<TVShow> getTVShowsWithTitleFromDateForCountry(String title, String date, String country) {
+        return tvShowRepository.findByTitleAndStartDateTimeAfterAndChannelCountryCode(
                 title,
                 stringToDateTime(date),
                 CountryCode.getByAlpha2Code(country)

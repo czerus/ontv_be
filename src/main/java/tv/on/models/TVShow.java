@@ -1,13 +1,17 @@
 package tv.on.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table
+@AllArgsConstructor
+@NoArgsConstructor
 public class TVShow {
     @Id
     @SequenceGenerator(
@@ -29,6 +33,7 @@ public class TVShow {
     public String director;
     @ManyToOne
     public Channel channel;
-    public LocalDateTime startTime;
+    public LocalDateTime startDateTime;
     public LocalDateTime endDateTime;
+
 }

@@ -10,6 +10,6 @@ import java.util.List;
 public interface TVShowRepository extends JpaRepository<TVShow, Long> {
 
     List<TVShow> findByTitle(String title);
-    List<TVShow> findByTitleAndStartTimeAfter(String title, LocalDateTime startTime);
-    List<TVShow> findByTitleAndStartTimeAfterAndChannelCountryCode(String title, LocalDateTime startTime, CountryCode countryCode);
+    List<TVShow> findByTitleAndStartDateTimeAfter(String title, LocalDateTime startDateTime);
+    List<TVShow> findByTitleAndStartDateTimeAfterAndChannelCountryCode(String title, LocalDateTime startDateTime, CountryCode countryCode);
 }

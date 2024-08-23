@@ -54,7 +54,7 @@ public class TelemagazynScrapperProvider extends ScrapperBase implements Scrappe
                             tvShow.lead = html.getElementsByClass("atomsTvChannelEmissionTile__lead").text();
                             tvShow.title = html.getElementsByClass("atomsTvChannelEmissionTile__title").text();
                             tvShow.episode = html.getElementsByClass("atomsTvChannelEmissionTile__episode-value").text();
-                            tvShow.startTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-time"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
+                            tvShow.startDateTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-time"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
                             tvShow.endDateTime = LocalDateTime.parse(html.getElementsByTag("time").get(0).attributes().get("data-endtime"), DateTimeFormatter.ISO_ZONED_DATE_TIME);
                             logger.info("Found TV Show: {}", tvShow);
                             return tvShow;

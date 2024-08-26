@@ -14,13 +14,17 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import tv.on.OnTvApplication;
 import tv.on.Repositories.ChannelRepository;
+import tv.on.Repositories.HistoryRepository;
 import tv.on.Repositories.TVShowRepository;
 import tv.on.models.Channel;
+import tv.on.models.History;
 import tv.on.models.TVShow;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         locations = "classpath:application-integrationtest.properties")
 public class IntegrationTests {
 
+    private final LocalDate updateTime = LocalDate.now();
     private final LocalDateTime startTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
     private final LocalDateTime endTime = startTime.plus(Duration.ofMinutes(30L));
     private final Channel channel = new Channel(
@@ -49,6 +54,9 @@ public class IntegrationTests {
 
     @Autowired
     private TVShowRepository tvShowRepository;
+
+    @Autowired
+    private HistoryRepository historyRepository;
 
 
     @SneakyThrows
@@ -85,6 +93,41 @@ public class IntegrationTests {
                 .andExpect(jsonPath("$[0].channel").value(this.channel))
                 .andExpect(isDateTimeMatching("startDateTime", this.startTime))
                 .andExpect(isDateTimeMatching("endDateTime", this.endTime));
+    }
+
+    @SneakyThrows
+    @Test
+    public void testCreateHistory() {
+        createTestHistory();
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/updatetime?countryCode=PL")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content()
+                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.latestDateWithSchedule").value(updateTime.toString()));
+
+
+    }
+
+    private void createTestHistory() {
+        List<History> history = List.of(
+                new History(
+                        1L, 
+                        CountryCode.getByAlpha2Code("PL"),
+                        LocalDate.now().minusDays(1),
+                        LocalDateTime.now(), 
+                        LocalDateTime.now().plus(Duration.ofMinutes(5))
+                ),
+                new History(
+                        2L, 
+                        CountryCode.getByAlpha2Code("PL"),
+                        updateTime,
+                        LocalDateTime.now(), 
+                        LocalDateTime.now().plus(Duration.ofMinutes(5))
+                )
+        );
+        historyRepository.saveAll(history);
     }
 
     private void createTestTVShow() {

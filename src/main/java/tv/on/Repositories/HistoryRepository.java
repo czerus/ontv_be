@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long> {
 
-    List<History> findByCountryCodeOrderByLatestDateWithSchedule(CountryCode countryCode);
+    List<History> findByCountryCodeOrderByLatestDateWithScheduleDesc(CountryCode countryCode);
 }

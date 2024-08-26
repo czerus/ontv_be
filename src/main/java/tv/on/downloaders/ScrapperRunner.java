@@ -58,7 +58,7 @@ public class ScrapperRunner {
 
 	private LocalDate getDateForStartingScrapping(CountryCode countryCode) {
 		LocalDate date = LocalDate.now();
-		List<History> historyList = historyRepository.findByCountryCodeOrderByLatestDateWithSchedule(countryCode);
+		List<History> historyList = historyRepository.findByCountryCodeOrderByLatestDateWithScheduleDesc(countryCode);
 		if (historyList.isEmpty()) {
 			return date;
 		}
